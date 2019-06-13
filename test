@@ -1,0 +1,13 @@
+@Autowired
+    private Configuration freemarkerConfig;
+
+    public void sendSimpleMessage(Mail mail) throws MessagingException, IOException, TemplateException {
+        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message,
+                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                StandardCharsets.UTF_8.name());
+
+        helper.addAttachment("logo.png", new ClassPathResource("memorynotfound-logo.png"));
+
+        Template t = freemarkerConfig.getTemplate("email-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, mail.getModel());
