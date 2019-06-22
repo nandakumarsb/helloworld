@@ -1,0 +1,5 @@
+	ObjectMapper mapper = new ObjectMapper();
+		Object json = mapper.readValue(tr, Object.class);
+
+		String indented = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+		
